@@ -49,6 +49,19 @@ public class EnrollService {
         return new CalendarResponseDto(totalIncome, totalExpense, enrollResponseDtos);
     }
 
+    @Transactional(readOnly = true)
+    public List<EnrollResponseDto> getEnroll(int year, int month, int day) {
+        LocalDate targetDate = LocalDate.of(year, month, day);
+
+        List<Enroll> getEnroll = enrollRepository.findAll().stream()
+                .filter(enroll -> enroll.getDate().equals(targetDate))
+                .collect(Collectors.toList());
+
+        return getEnroll.stream()
+                .map(enroll -> new EnrollResponseDto(enroll.getId(), enroll.getDate(), enroll.getType(), enroll.getCategory(), enroll.getContent(), enroll.getPrice()))
+                .collect(Collectors.toList());
+    }
+
     @Transactional
     public void deleteEnroll(Long enrollId){
         Enroll enroll = enrollRepository.findById(enrollId).orElseThrow(

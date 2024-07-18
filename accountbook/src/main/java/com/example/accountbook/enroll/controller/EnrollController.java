@@ -28,6 +28,13 @@ public class EnrollController {
         return ResponseEntity.ok(calendarResponseDto);
     }
 
+    @GetMapping("/enrolls/{year}/{month}/{day}")
+    public ResponseEntity<List<EnrollResponseDto>>getEnroll(@PathVariable int year, @PathVariable int month, @PathVariable int day){
+        List<EnrollResponseDto> getEnroll = enrollService.getEnroll(year, month, day);
+        return ResponseEntity.ok(getEnroll);
+    }
+
+
     @DeleteMapping("/enrolls/{enrollId}")
     public ResponseEntity<Void>deleteEnroll(@PathVariable Long enrollId){
         enrollService.deleteEnroll(enrollId);
