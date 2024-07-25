@@ -34,12 +34,16 @@ public class EnrollController {
         return ResponseEntity.ok(getEnroll);
     }
 
+    @PutMapping("/enrolls/{enrollId}")
+    public ResponseEntity<EnrollResponseDto>updateEnroll(@RequestBody EnrollRequestDto enrollRequestDto, @PathVariable Long enrollId){
+        EnrollResponseDto enrollResponseDto = enrollService.updateEnroll(enrollRequestDto, enrollId);
+        return ResponseEntity.ok(enrollResponseDto);
+    }
+
 
     @DeleteMapping("/enrolls/{enrollId}")
     public ResponseEntity<Void>deleteEnroll(@PathVariable Long enrollId){
         enrollService.deleteEnroll(enrollId);
         return ResponseEntity.ok().build();
     }
-
-    //testtest
 }

@@ -63,6 +63,16 @@ public class EnrollService {
     }
 
     @Transactional
+    public EnrollResponseDto updateEnroll(EnrollRequestDto enrollRequestDto, Long enrollId){
+        Enroll enroll = enrollRepository.findById(enrollId).orElseThrow(
+                ()-> new IllegalArgumentException("수정할 수 없습니다")
+        );
+        enroll.update(enrollRequestDto);
+        enrollRepository.save(enroll);
+        return new EnrollResponseDto(enroll);
+    }
+
+    @Transactional
     public void deleteEnroll(Long enrollId){
         Enroll enroll = enrollRepository.findById(enrollId).orElseThrow(
                 ()->new IllegalArgumentException("삭제 할 수 없습니다.")

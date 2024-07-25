@@ -30,4 +30,11 @@ public class Enroll {
         this.content = enrollRequestDto.getContent();
         this.price = enrollRequestDto.getPrice();
     }
+
+    public void update(EnrollRequestDto enrollRequestDto){
+        this.type = enrollRequestDto.getType();
+        this.category = enrollRequestDto.getCategory();
+        this.content = enrollRequestDto.getContent();
+        this.price = enrollRequestDto.getPrice();
+    }
 }
